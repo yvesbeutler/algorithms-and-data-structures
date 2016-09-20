@@ -3,12 +3,14 @@ package sorting;
 import java.util.Random;
 
 /**
- * @author yvesbeutler
  * Demonstrates the use of different sorting algorithms.
+ *
+ * @author yvesbeutler
+ * @since 19.09.2016
  */
 public class SortTest {
 
-    private static int counter;
+    static int counter;
     private static final int N = 10000;
 
     public static void main(String[] args) {
@@ -24,13 +26,14 @@ public class SortTest {
 
         // mix up the array
         for (int i = 0; i < a.length; i++) {
-            swap(a, i, rnd.nextInt(N-1));
+            BubbleSort.swap(a, i, rnd.nextInt(N-1));
         }
 
         counter = 0;
         t1 = System.currentTimeMillis();
 
         BubbleSort.sort(a);
+        //MergeSort.sort(a);
 
         t2 = System.currentTimeMillis();
 
@@ -39,19 +42,6 @@ public class SortTest {
         System.out.println("CPU-Time usage: " + time + " ms");
         System.out.println("Sort-Check: " + sortCheck(a));
         System.out.println("Swap-Number: " + counter);
-    }
-
-    /**
-     * swap the array elements a[i] and a[k]
-     * @param a int array
-     * @param i position in the array 'a'
-     * @param k position in the array 'a'
-     */
-     static void swap(int [] a, int i, int k){
-        int tmp=a[i];
-        a[i]=a[k];
-        a[k]=tmp;
-        counter++;
     }
 
     /**
