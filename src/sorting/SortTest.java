@@ -3,10 +3,9 @@ package sorting;
 import java.util.Random;
 
 /**
- * Demonstrates the use of different sorting algorithms.
- *
  * @author yvesbeutler
  * @since 19.09.2016
+ * Demonstrates the use of different sorting algorithms.
  */
 public class SortTest {
 

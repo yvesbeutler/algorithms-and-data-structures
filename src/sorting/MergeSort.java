@@ -1,10 +1,9 @@
 package sorting;
 
 /**
- * Demonstrates the merge (or quick) sort algorithm.
- *
  * @author yvesbeutler
  * @since 20.09.2016
+ * Demonstrates the merge (or often called quick) sort algorithm.
  */
 class MergeSort {
 

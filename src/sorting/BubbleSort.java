@@ -2,6 +2,7 @@ package sorting;
 
 /**
  * @author yvesbeutler
+ * @since 19.09.2016
  * Demonstrates the bubble sort algorithm.
  */
 class BubbleSort {
