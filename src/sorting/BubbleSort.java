@@ -1,9 +1,8 @@
 package sorting;
 
-import static sorting.SortTest.swap;
-
 /**
  * @author yvesbeutler
+ * @since 19.09.2016
  * Demonstrates the bubble sort algorithm.
  */
 class BubbleSort {
@@ -17,4 +16,12 @@ class BubbleSort {
         }
         return a;
     }
+
+    static void swap(int[] a, int i, int k){
+        int tmp=a[i];
+        a[i]=a[k];
+        a[k]=tmp;
+        SortTest.counter++;
+    }
+
 }
