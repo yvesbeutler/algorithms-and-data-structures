@@ -16,6 +16,9 @@ After any insertion you have to check if the Heap is still valid and holds the H
 it's not valid, you have to swap the new node with its parent. You repeat this step until the Heap
 property is again valid. Then you can add the next node.
 
+
+![alt text](https://www.tutorialspoint.com/data_structures_algorithms/images/max_heap_animation.gif "Max-Heap creation example")
+
 ### Deletion Algorithm
 
 If you want to delete from a Heap you can only delete the root node which is either the greatest or
