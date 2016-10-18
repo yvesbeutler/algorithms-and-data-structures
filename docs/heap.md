@@ -24,14 +24,4 @@ node of the last level to the root position. Now you compare the new root with i
 positions if necessary. Repeat these steps until the Heap property is valid again.
 
 
-**Example deletion of a Max-Heap**
-
-Step 1 − Remove root node.
-
-Step 2 − Move the last element of last level to root.
-
-Step 3 − Compare the value of this child node with its parent.
-
-Step 4 − If value of parent is less than child, then swap them.
-
-Step 5 − Repeat step 3 & 4 until Heap property holds.
+![alt text](https://www.tutorialspoint.com/data_structures_algorithms/images/max_heap_deletion_animation.gif "Max-Heap deletion example")
