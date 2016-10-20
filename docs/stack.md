@@ -1,6 +1,6 @@
 # Stack
 
-**Link:** https://www.tutorialspoint.com/data_structures_algorithms/linked_list_algorithms.htm
+**Link:** https://www.tutorialspoint.com/data_structures_algorithms/stack_algorithm.htm
 ___
 
 ### Basic structure
