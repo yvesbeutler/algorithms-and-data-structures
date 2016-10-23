@@ -20,6 +20,7 @@ public class MyPriorityQueue<K extends Comparable<? super K>, E> implements Prio
         K1 key;
         E1 element;
         int position;
+        Object creator = MyPriorityQueue.this;
 
         PQLoc(K1 key, E1 element) {
             this.key = key;
@@ -49,6 +50,25 @@ public class MyPriorityQueue<K extends Comparable<? super K>, E> implements Prio
         System.out.println(pq.removeMin().getElement());
         System.out.println(pq.removeMin().getElement());
         System.out.println(pq.removeMin().getElement());
+    }
+
+    private PQLoc checkAndCast(Locator<K, E> pos) {
+        PQLoc locator;
+        try {
+            locator = (PQLoc) pos;
+        } catch (ClassCastException e) {
+            throw new RuntimeException("This Locator doesn't belong to the PriorityQueue");
+        }
+
+        if (locator.creator == null) {
+            throw new RuntimeException("Locator was already deleted");
+        }
+
+        if (locator.creator != this) {
+            throw new RuntimeException("Locator doesn't belong to this PriorityQueue instance");
+        }
+
+        return locator;
     }
 
     @Override
