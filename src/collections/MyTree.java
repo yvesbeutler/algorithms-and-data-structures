@@ -104,17 +104,48 @@ public class MyTree<E> implements Tree<E> {
 
     @Override
     public Iterator<E> childrenElements(Position<E> parent) {
-        return null;
+        Node node = checkAndCast(parent);
+        return new Iterator<E>() {
+            Iterator<Node> iterator = node.children.elements();
+            @Override
+            public boolean hasNext() {
+                return iterator.hasNext();
+            }
+
+            @Override
+            public E next() {
+                return iterator.next().getElement();
+            }
+        };
     }
 
     @Override
     public int numberOfChildren(Position<E> parent) {
-        return 0;
+        Node node = checkAndCast(parent);
+        return node.children.size();
     }
 
     @Override
-    public Position<E> insertParent(Position<E> p, E o) {
-        return null;
+    public Position<E> insertParent(Position<E> pos, E o) {
+        Node node = checkAndCast(pos);
+        Node nodeParent = new Node(o);
+
+        if (node == root) {
+            root = nodeParent;
+        } else {
+
+            // new parent takes the former role of node
+            nodeParent.parent = node.parent;
+            nodeParent.childPosition = node.childPosition;
+            nodeParent.parent.children.replaceElement(nodeParent.childPosition, nodeParent);
+        }
+
+        // add node as a child of the new parent
+        node.parent = nodeParent;
+        node.childPosition = nodeParent.children.insertFirst(node);
+        size++;
+
+        return nodeParent;
     }
 
     @Override
@@ -129,34 +160,95 @@ public class MyTree<E> implements Tree<E> {
 
     @Override
     public Position<E> addChildAt(int pos, Position<E> parent, E o) {
-        return null;
+        Node nodeParent = checkAndCast(parent);
+
+        if (pos > nodeParent.children.size() || pos < 0) {
+            throw new RuntimeException("Can't insert child on an invalid rank");
+        }
+
+        Node node = new Node(o);
+        node.parent = nodeParent;
+
+        Position<Node> linkedListPosition = null;
+        if (pos == 0) {
+            linkedListPosition = nodeParent.children.insertFirst(node);
+        } else if (pos == nodeParent.children.size()) {
+            linkedListPosition = nodeParent.children.insertLast(node);
+        } else {
+            Iterator<Position<Node>> iterator = nodeParent.children.positions();
+            // skip pos-2 nodes
+            for (int i = 0; i < pos-1; i++) {
+                iterator.next();
+            }
+
+            // create position before the insertion point
+            Position<Node> prevPos = iterator.next();
+            linkedListPosition = nodeParent.children.insertAfter(prevPos, node);
+        }
+
+        node.childPosition = linkedListPosition;
+        size++;
+
+        return node;
     }
 
     @Override
-    public Position<E> addSiblingAfter(Position<E> sibling, E o) {
-        return null;
+    public Position<E> addSiblingAfter(Position<E> sib, E o) {
+        Node sibling = checkAndCast(sib);
+        if (sib == root) {
+            throw new RuntimeException("Root can't have siblings");
+        }
+
+        Node node = new Node(o);
+        node.parent = sibling.parent;
+        node.childPosition = sibling.parent.children.insertAfter(sibling.childPosition, node);
+        size++;
+
+        return node;
     }
 
     @Override
-    public Position<E> addSiblingBefore(Position<E> sibling, E o) {
-        return null;
+    public Position<E> addSiblingBefore(Position<E> sib, E o) {
+        Node sibling = checkAndCast(sib);
+        if (sib == root) {
+            throw new RuntimeException("Root can't have siblings");
+        }
+
+        Node node = new Node(o);
+        node.parent = sibling.parent;
+        node.childPosition = sibling.parent.children.insertBefore(sibling.childPosition, node);
+        size++;
+
+        return node;
     }
 
     @Override
     public void remove(Position<E> pos) {
-        // TODO: implement remove method
-        // Node node = checkAndCast(pos);
-        // node.parent.children.remove(pos);
+        Node node = checkAndCast(pos);
+        if (node.children.size() != 0) {
+            throw new RuntimeException("Can't remove node with children");
+        }
+
+        node.creator = null;
+        size--;
+
+        if (node == root) {
+            root = null;
+        } else {
+            node.parent.children.remove(node.childPosition);
+        }
     }
 
     @Override
-    public boolean isExternal(Position<E> p) {
-        return false;
+    public boolean isExternal(Position<E> pos) {
+        Node node = checkAndCast(pos);
+        return node.children.size() == 0;
     }
 
     @Override
-    public boolean isInternal(Position<E> p) {
-        return false;
+    public boolean isInternal(Position<E> pos) {
+        Node node = checkAndCast(pos);
+        return node.children.size() != 0;
     }
 
     @Override
@@ -165,12 +257,17 @@ public class MyTree<E> implements Tree<E> {
     }
 
     @Override
-    public E replaceElement(Position<E> p, E o) {
-        return null;
+    public E replaceElement(Position<E> pos, E o) {
+        Node node = checkAndCast(pos);
+        E element = node.getElement();
+        node.element = o;
+        return element;
     }
 
     private void print() {
-        print(root, "");
+        if (size != 0) {
+            print(root, "");
+        }
     }
 
     private void print(Node node, String index) {
