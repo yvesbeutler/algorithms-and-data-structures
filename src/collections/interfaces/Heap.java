@@ -2,12 +2,12 @@ package collections.interfaces;
 
 /**
  * @author yvesbeutler
- * A Locator based priority queue which allows to store key - element pairs and allows
+ * A Locator based Heap which allows to store key - element pairs and allows
  * for O(log n) removal and for O(log n) key replacement and insertion
  * @param <K> The type of the key (has to extend a comparable class)
  * @param <E> The type of the elements stored
  */
-public interface PriorityQueue<K extends Comparable<? super K>,E> {
+public interface Heap<K extends Comparable<? super K>,E> {
 
     /**
      * @return the Locator with a minimal key of this

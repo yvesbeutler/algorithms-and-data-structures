@@ -1,15 +1,17 @@
 package collections;
 
 import collections.interfaces.Locator;
-import collections.interfaces.PriorityQueue;
+import collections.interfaces.Heap;
 
 import java.util.Arrays;
 
 /**
  * @author yvesbeutler
- * Basic implementation of a PriorityQueue using a Locator to store its data.
+ * Implementation of a Heap using a Locator to store its data. The Heap data structure
+ * is sorted along its branches. There are two types of Heaps, the Min- and Max-Heap.
+ * The root node is the smallest, so this is a Min-Heap.
  */
-public class MyPriorityQueue<K extends Comparable<? super K>, E> implements PriorityQueue<K, E> {
+public class MyHeap<K extends Comparable<? super K>, E> implements Heap<K, E> {
 
     private PQLoc<K, E> [] heap = new PQLoc[1];
     private int size;
@@ -19,7 +21,7 @@ public class MyPriorityQueue<K extends Comparable<? super K>, E> implements Prio
         K1 key;
         E1 element;
         int position;
-        Object creator = MyPriorityQueue.this;
+        Object creator = MyHeap.this;
 
         PQLoc(K1 key, E1 element) {
             this.key = key;
@@ -37,37 +39,19 @@ public class MyPriorityQueue<K extends Comparable<? super K>, E> implements Prio
     }
 
     public static void main(String[] args) {
-        MyPriorityQueue<Integer, String> pq = new MyPriorityQueue<>();
-        pq.insert(2, "Joris");
-        pq.insert(7, "Sascha");
-        pq.insert(1, "Joy");
-        pq.insert(10, "Mathew");
-        pq.insert(4, "Tobi");
+        MyHeap<Integer, String> heap = new MyHeap<>();
+        heap.insert(2, "Joris");
+        heap.insert(7, "Sascha");
+        heap.insert(1, "Joy");
+        heap.insert(9, "Mathew");
+        heap.insert(4, "Tobi");
 
-        System.out.println(pq.removeMin().getElement());
-        System.out.println(pq.removeMin().getElement());
-        System.out.println(pq.removeMin().getElement());
-        System.out.println(pq.removeMin().getElement());
-        System.out.println(pq.removeMin().getElement());
-    }
+        System.out.println(heap.removeMin().getElement());
+        System.out.println(heap.removeMin().getElement());
 
-    private PQLoc checkAndCast(Locator<K, E> pos) {
-        PQLoc locator;
-        try {
-            locator = (PQLoc) pos;
-        } catch (ClassCastException e) {
-            throw new RuntimeException("This Locator doesn't belong to the PriorityQueue");
-        }
-
-        if (locator.creator == null) {
-            throw new RuntimeException("Locator was already deleted");
-        }
-
-        if (locator.creator != this) {
-            throw new RuntimeException("Locator doesn't belong to this PriorityQueue instance");
-        }
-
-        return locator;
+        System.out.println(heap.removeMin().getElement());
+        System.out.println(heap.removeMin().getElement());
+        System.out.println(heap.removeMin().getElement());
     }
 
     @Override
