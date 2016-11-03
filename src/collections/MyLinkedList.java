@@ -7,7 +7,6 @@ import java.util.Iterator;
 
 /**
  * @author yvesbeutler
- * @since 15.10.2016
  * Basic implementation of a linked list using an auxiliary class called node.
  */
 public class MyLinkedList<E> implements List<E>, Iterable<E> {
@@ -34,23 +33,17 @@ public class MyLinkedList<E> implements List<E>, Iterable<E> {
 
     public static void main(String[] args) {
         MyLinkedList<Integer> list = new MyLinkedList<>();
-        Position<Integer> pos1 = list.insertFirst(1);
-        Position<Integer> pos2 = list.insertFirst(2);
-        Position<Integer> pos3 = list.insertFirst(3);
-        Position<Integer> pos4 = list.insertFirst(4);
-        Position<Integer> pos5 = list.insertBefore(pos4, 5);
+        Position<Integer> pos1 = list.insertFirst(4);
+        Position<Integer> pos2 = list.insertFirst(3);
+        Position<Integer> pos3 = list.insertFirst(1);
+        Position<Integer> pos4 = list.insertLast(5);
+        Position<Integer> pos5 = list.insertAfter(pos3, 2);
 
         // log all current list elements
         Iterator<Position<Integer>> iterator = list.positions();
         while (iterator.hasNext()) {
             System.out.println(iterator.next().getElement());
         }
-
-        // monitor performance of the linked list
-
-        // TODO: implement monitoring..
-
-
     }
 
     private MyLinkedList<E>.Node checkAndCast(Position<E> pos) {

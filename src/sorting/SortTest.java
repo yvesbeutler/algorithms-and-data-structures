@@ -7,14 +7,14 @@ import java.util.Random;
  * @since 19.09.2016
  * Demonstrates the use of different sorting algorithms.
  */
-public class SortTest {
+class SortTest {
 
     static int counter;
     private static final int N = 10000;
 
     public static void main(String[] args) {
 
-        long t1=0, t2=0, time=0;
+        long t1, t2, time;
         Random rnd = new Random(Integer.MAX_VALUE);
 
         // create ordered array of size N

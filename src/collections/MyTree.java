@@ -6,7 +6,6 @@ import java.util.Iterator;
 
 /**
  * @author yvesbeutler
- * @since 17.10.2016
  * Basic implementation of a tree using a linked list to store all of its children.
  */
 public class MyTree<E> implements Tree<E> {
@@ -17,7 +16,7 @@ public class MyTree<E> implements Tree<E> {
     private Position deepest;
 
     // auxiliary class for positions
-    class Node implements Position<E> {
+    private class Node implements Position<E> {
         E element;
         Node parent;
         MyLinkedList<Node> children = new MyLinkedList<>();
@@ -169,7 +168,7 @@ public class MyTree<E> implements Tree<E> {
         Node node = new Node(o);
         node.parent = nodeParent;
 
-        Position<Node> linkedListPosition = null;
+        Position<Node> linkedListPosition;
         if (pos == 0) {
             linkedListPosition = nodeParent.children.insertFirst(node);
         } else if (pos == nodeParent.children.size()) {

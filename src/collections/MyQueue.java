@@ -4,7 +4,6 @@ import collections.interfaces.Queue;
 
 /**
  * @author yvesbeutler
- * @since 14.10.2016
  * Basic implementation of a queue without the use of a linked list. It uses an array to store the elements
  * and if the array is completely full, the expand() method doubles the size of the array.
  */
@@ -20,7 +19,6 @@ public class MyQueue<E> implements Queue<E> {
         queue.enqueue("Tobias");
         queue.enqueue("Joris");
         queue.enqueue("Joy");
-        queue.log();
 
         System.out.println("remove:\t" + queue.dequeue());
         System.out.println("remove:\t" + queue.dequeue());
@@ -86,16 +84,4 @@ public class MyQueue<E> implements Queue<E> {
         return size==0;
     }
 
-    @Override
-    public void log() {
-        System.out.println("SIZE:\t" + size);
-        System.out.println("IN:\t\t" + in);
-        System.out.println("OUT:\t" + out);
-        System.out.println("------------");
-        for(int i=0; i < size; i++) {
-            System.out.println("store[" + i + "]: " + store[i]);
-        }
-        System.out.println();
-        System.out.println();
-    }
 }

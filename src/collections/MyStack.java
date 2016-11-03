@@ -6,7 +6,6 @@ import java.util.Arrays;
 
 /**
  * @author yvesbeutler
- * @since 17.10.2016
  * Basic implementation of a stack using an generic array to store its elements.
  * A comparison between the stack and an array list shows that the stack has got
  * an equal or even better performance than the list.

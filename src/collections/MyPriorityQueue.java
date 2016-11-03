@@ -7,7 +7,6 @@ import java.util.Arrays;
 
 /**
  * @author yvesbeutler
- * @since 21.10.2016
  * Basic implementation of a PriorityQueue using a Locator to store its data.
  */
 public class MyPriorityQueue<K extends Comparable<? super K>, E> implements PriorityQueue<K, E> {
@@ -16,7 +15,7 @@ public class MyPriorityQueue<K extends Comparable<? super K>, E> implements Prio
     private int size;
 
     // auxiliary class for positions
-    class PQLoc <K1 extends Comparable<? super K1>, E1> implements Locator<K1, E1> {
+    private class PQLoc <K1 extends Comparable<? super K1>, E1> implements Locator<K1, E1> {
         K1 key;
         E1 element;
         int position;
