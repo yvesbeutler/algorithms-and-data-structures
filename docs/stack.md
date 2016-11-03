@@ -19,14 +19,27 @@ often useful if you implement several other operations to simplify the Stack man
 which allows you to get the top element without removing it from the Stack. It's useful to check the state of the Stack
 with _isFull()_ or _isEmpty()_ functions to prevent errors when inserting or deleting elements.
 
+**_push()_ operation example**
+
+```java
+public void push(E o) {
+    if (pointer == store.length) {
+        expand();
+    }
+    store[pointer++] = o;
+}
+```
+
+
 **_pop()_ operation example**
 
 ```java
 public int pop() {
-    if (!isEmpty()) {
-        int data = stack[top--];
-        return data;
+    if (pointer != 0) {
+        return stack[--pointer];
     }
-    System.out.println("Couldn't retrieve data because the stack is empty");
+    throw new RuntimeException("Couldn't retrieve data because the stack is empty");
 }
 ```
+
+
