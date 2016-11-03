@@ -19,6 +19,7 @@ The application structure presented in this repository is divided by its type. A
 ├── docs                     # Documentation of all used data structures
 ├── src                      # All source code
 │   └── collections          # Data structures
-│   │   └── interfaces       # Interfaces for the data structures
+│   │   ├── interfaces       # Interfaces for the data structures
+│   │   └── samples          # Real world examples to demonstrate usage
 │   └── sorting              # Sorting algorithms
 ```
