@@ -5,13 +5,14 @@ import collections.interfaces.Queue;
 /**
  * @author yvesbeutler
  * Basic implementation of a queue without the use of a linked list. It uses an array to store the elements
- * and if the array is completely full, the expand() method doubles the size of the array.
+ * and if the array is completely full, the expand() method doubles the size of the array. The FIFO principle
+ * is implemented by two pointers. One points behind the last element, the other points at the first element.
  */
 public class MyQueue<E> implements Queue<E> {
 
     private E[] store = (E[]) new Object[1];
-    private int in;
-    private int out;
+    private int pointerIn;
+    private int pointerOut;
     private int size;
 
     public static void main(String[] args) {
@@ -34,13 +35,13 @@ public class MyQueue<E> implements Queue<E> {
         E[] newStore = (E[]) new Object[store.length*2];
         // copy values into new array
         for (int i=0; i < size; i++) {
-            out = (out==store.length) ? 0 : out;
-            newStore[i] = store[out++];
+            pointerOut = (pointerOut == store.length) ? 0 : pointerOut;
+            newStore[i] = store[pointerOut++];
         }
 
         // init variables
-        in = size;
-        out = 0;
+        pointerIn = size;
+        pointerOut = 0;
         store = newStore;
     }
 
@@ -50,8 +51,8 @@ public class MyQueue<E> implements Queue<E> {
             expand();
         }
 
-        in = (in == store.length) ? 0 : in;
-        store[in++] = o;
+        pointerIn = (pointerIn == store.length) ? 0 : pointerIn;
+        store[pointerIn++] = o;
         size++;
     }
 
@@ -61,15 +62,15 @@ public class MyQueue<E> implements Queue<E> {
             throw new RuntimeException("The queue is empty!");
         }
 
-        out = (out == store.length) ? 0 : out;
+        pointerOut = (pointerOut == store.length) ? 0 : pointerOut;
         size--;
-        return store[out++];
+        return store[pointerOut++];
     }
 
     @Override
     public E head() {
-        if (!isEmpty() && out < size) {
-            return store[out];
+        if (!isEmpty() && pointerOut < size) {
+            return store[pointerOut];
         }
         return null;
     }

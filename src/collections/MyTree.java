@@ -6,7 +6,8 @@ import java.util.Iterator;
 
 /**
  * @author yvesbeutler
- * Basic implementation of a tree using a linked list to store all of its children.
+ * This implementation of a Tree is using a Linked List to connect each node with its parent
+ * and its children. It's not a binary tree so it can have more than two child nodes.
  */
 public class MyTree<E> implements Tree<E> {
 
@@ -35,10 +36,10 @@ public class MyTree<E> implements Tree<E> {
 
     public static void main(String[] args) {
         MyTree<String> tree = new MyTree<>();
-        Position<String> pos1 = tree.createRoot("Book");
-        Position<String> pos2 = tree.addChild(pos1, "Chapter 1");
-        Position<String> pos3 = tree.addChild(pos1, "Chapter 2");
-        Position<String> pos4 = tree.addChild(pos1, "Chapter 3");
+        Position<String> root = tree.createRoot("Book");
+        Position<String> pos2 = tree.addChild(root, "Chapter 1");
+        Position<String> pos3 = tree.addChild(root, "Chapter 2");
+        Position<String> pos4 = tree.addChild(root, "Chapter 3");
         Position<String> pos5 = tree.addChild(pos3, "Chapter 2.1");
         tree.print();
 

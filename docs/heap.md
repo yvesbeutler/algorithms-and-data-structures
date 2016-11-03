@@ -3,6 +3,13 @@
 **Link:** https://www.tutorialspoint.com/data_structures_algorithms/heap_data_structure.htm
 ___
 
+### Basic structure
+
+The Heap is a binary search tree, which means that each node can only have two children. It is
+sorted along its own branches (vertically). The Heap has no horizontal sort order. A binary tree
+has the benefits of both the ordered Array and the Linked List as searching is as quick as in an
+ordered Array and insertion or deletion operation are as fast as in Linked Lists.
+
 ### Min- and Max-Heap
 
 In a Heap the value of the root node is either greater or less than any of its children. If the

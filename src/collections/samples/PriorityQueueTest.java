@@ -8,7 +8,7 @@ import java.util.PriorityQueue;
  * Patients are ordered by their ID but if there are emergency cases, then this patients
  * have a higher priority than the others.
  */
-public class PQTest {
+public class PriorityQueueTest {
 
     public static void main(String[] args) {
 
@@ -21,6 +21,7 @@ public class PQTest {
             }
         });
 
+        // queue is being sorted after every insert
         priorityQueue.add(new Patient(1, "Sascha", false));
         priorityQueue.add(new Patient(2, "Mathew", false));
         priorityQueue.add(new Patient(3, "Joy", true));
