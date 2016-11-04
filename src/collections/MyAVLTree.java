@@ -81,6 +81,112 @@ public class MyAVLTree<K extends Comparable<? super K>, E> implements OrderedDic
         System.out.println("size: " + size());
     }
 
+    private void adjustHeightAboveAndBalance(Node node) {
+        node = node.parent;
+
+        while (node != null) {
+            // get new height
+            int h = 1 + Math.max(node.left.height, node.right.height);
+            boolean balanced = Math.abs(node.left.height - node.right.height) < 2;
+
+            if (node.height == h && balanced) {
+                return;
+            }
+
+            // set new height
+            node.height = h;
+
+            if (!balanced) {
+                // adjust structure
+                node = restructure(node);
+            }
+
+            node = node.parent;
+        }
+    }
+
+    private Node restructure(Node node) {
+
+        Node parent = node.parent;
+        Node x, y, z = node;
+        Node a, b, c, t1, t2;
+
+        // if left subtree > right subtree
+        if (z.left.height > z.right.height) {
+
+            c = z;
+            y = z.left;
+
+            // check if single or double rotation
+            if (y.left.height > z.right.height) {
+                x = y.left;
+                t1 = x.right;
+                t2 = y.right;
+                b = y;
+                a = x;
+            } else {
+                // double rotation
+                x = y.right;
+                t1 = x.left;
+                t2 = x.right;
+                a = y;
+                b = x;
+            }
+        }
+
+        // if right subtree > left subtree
+        else {
+
+            a = z;
+            y = z.right;
+
+            // check if single or double rotation
+            if (y.right.height >= y.left.height) {
+                x = y.right;
+                b = y;
+                c = x;
+                t1 = y.left;
+                t2 = x.left;
+            } else {
+                x = y.left;
+                b = x;
+                c = y;
+                t1 = x.left;
+                t2 = x.right;
+            }
+        }
+
+        // switch nodes
+        b.parent = parent;
+        if (parent != null) {
+            if (parent.left == z) {
+                parent.left = b;
+            } else {
+                parent.right = b;
+            }
+        } else {
+            root = b;
+        }
+
+        b.right = c;
+        b.left = a;
+        a.parent = b;
+        c.parent = b;
+
+        // for subtree
+        a.right = t1;
+        t1.parent = a;
+        c.left = t2;
+        t2.parent = c;
+
+        // calculate new heights
+        a.height = Math.max(a.left.height, a.right.height) + 1;
+        c.height = Math.max(c.left.height, c.right.height) + 1;
+        b.height = Math.max(b.left.height, b.right.height) + 1;
+
+        return b;
+    }
+
     @Override
     public int size() {
         return size;
@@ -99,7 +205,6 @@ public class MyAVLTree<K extends Comparable<? super K>, E> implements OrderedDic
     @Override
     public Locator<K, E> insert(K key, E o) {
         Node node = root;
-
         while (!node.isExternal()) {
             if (key.compareTo(node.key) < 0) {
                 node = node.left;
@@ -110,6 +215,9 @@ public class MyAVLTree<K extends Comparable<? super K>, E> implements OrderedDic
 
         // add content to former external node
         node.expand(key, o);
+
+        // set new height and balance
+        adjustHeightAboveAndBalance(node);
 
         size++;
         return node;
