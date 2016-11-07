@@ -59,7 +59,18 @@ public class MyAVLTree<K extends Comparable<? super K>, E> implements OrderedDic
             right.parent = this;
             height = 1;
         }
+    }
 
+    private Node checkAndCast(Locator<K,E> pos) {
+        Node node;
+        try {
+            node = (Node) pos;
+        } catch (ClassCastException e) {
+            throw new RuntimeException("The locator doesn't belong to this LinkedList instance");
+        }
+        if (node.creator == null) throw new RuntimeException("The locator was already deleted");
+        if (node.creator != this) throw new RuntimeException("The locator belongs to another LinkedList instance");
+        return node;
     }
 
     public static void main(String[] args) {
@@ -240,7 +251,23 @@ public class MyAVLTree<K extends Comparable<? super K>, E> implements OrderedDic
 
     @Override
     public Locator<K, E> next(Locator<K, E> loc) {
-        return null;
+        Node node = checkAndCast(loc);
+        // next is above
+        if (node.right.isExternal()) {
+            // find first parent on right side
+            while (node.isRightChild()) {
+                node = node.parent;
+            }
+            node = node.parent;
+        } else {
+            // next is in right subtree
+            node = node.right;
+            // find most left
+            while (! node.left.isExternal()) {
+                node = node.left;
+            }
+        }
+        return node;
     }
 
     @Override
