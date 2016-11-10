@@ -2,8 +2,11 @@ package sorting;
 
 /**
  * @author yvesbeutler
- * @since 20.09.2016
- * Demonstrates the merge (or often called quick) sort algorithm.
+ * Mergesort is an efficient comparison-based sorting algorithm. It is stable, that means it preserves
+ * the input order of equal elements in the sorted output. It divides the unsorted data into n sublists,
+ * each containing only one element and merges them together to finally get one sublist which is sorted.
+ * Unlike Quicksort it cannot operate in-place which means that the Mergesort uses an additional dataset.
+ * The average complexity of the Mergesort is O(n log(n)).
  */
 class MergeSort {
 
@@ -17,10 +20,10 @@ class MergeSort {
 
     private static void mSort(int[] a, int from, int to) {
         if (from != to) {
-            int med = (from + to) / 2;
-            mSort(a, from, med);
-            mSort(a, med+1, to);
-            merge(a, from, med, to);
+            int middle = (from + to) / 2;
+            mSort(a, from, middle);
+            mSort(a, middle+1, to);
+            merge(a, from, middle, to);
         }
     }
 
