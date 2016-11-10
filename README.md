@@ -12,11 +12,15 @@ the Bern University of Applied Sciences.
 
 ### Project Structure
 
-The application structure presented in this repository is divided by its type. All data structures are separated from other code like sorting algorithms. Please note, that there is a documentation about every used data structure in the docs folder.
+The application structure presented in this repository is divided by its type. All data structures are separated from
+other code like sorting algorithms. Please note, that there is a documentation about every used algorithm in the
+docs folder.
 
 ```
 .
-├── docs                     # Documentation of all used data structures
+├── docs                     # Documentation
+│   └── sorting              # Documentation of sorting algorithms
+│   └── structures           # Documentation of data structures
 ├── src                      # All source code
 │   └── collections          # Data structures
 │   │   ├── interfaces       # Interfaces for the data structures
