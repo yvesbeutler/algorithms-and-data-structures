@@ -1,7 +1,7 @@
 # algorithms-and-data-structures
 
 **Author:** Yves Beutler
-**Github:** github.com/yvesbeutler
+**Github:** [github.com/yvesbeutler](https://github.com/yvesbeutler)
 
 **Version:** 0.3
 
