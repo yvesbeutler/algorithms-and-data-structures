@@ -25,7 +25,7 @@ class QuickSort {
         }
     }
 
-    private static int partition(int[] a, int left, int right) {
+    static int partition(int[] a, int left, int right) {
         int pivot = a[left];
         int i = left-1;
         int j = right+1;
